@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>后台登入</title>
+    <link rel="stylesheet" href="/admin/assign/style/backstage.css">
+</head>
+
+<body>
+    <div class="head">
+        <div class="logo fl"><a href="#"></a></div>
+        <h3 class="head_text fr">电子商务后台管理系统登入</h3>
+    </div>
+
+    <div class="content clearfix">
+        <div class="loginBox">
+            <div class="login_cont">
+                <form onSubmit="" method="post" name='myForm'>
+                    <ul class="login">
+                        <li class="l_tit">邮箱/用户名</li>
+                        <li class="mb_10"><input type="text" name="username" class="login_input user_icon"></li>
+                        <li class="l_tit">密码</li>
+                        <li class="mb_10"><input type="password" name="password" class="login_input user_icon"></li>
+                        <li class="l_tit">验证码</li>
+                        <li class="mb_10" style="position:relative"><input type="text" name="verify" class="login_input user_icon"><img style="position:absolute; top:1px; right:1px;" src="/code/index/h/32" onclick="this.src=this.src+'?'+Math.random()" /></li>
+                        <li class="autoLogin"><input type="checkbox" name="auto" id="a1" class="checked"><label for="a1">一周免登陆</label></li>
+                        <li class="mb_10" style="color:red"><small id="remind"></small></li>
+                        <li><input type="button" onclick="postSubmit()" value="" class="login_btn"></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="/admin/assign/js/function.js"></script>
+<script>
+    function submitSuccess(data) {
+        window.location.href = '/admin/';
+    }
+    function submitLoser(data) {
+        document.getElementById("remind").innerHTML = data;
+    }
+    function postSubmit() {
+        //获取值
+        var username = myForm.username.value;
+        var password = myForm.password.value;
+        var verify = myForm.verify.value;
+        var auto = myForm.auto.value;
+
+        $data = "username=" + username + "&password=" + password + "&verify=" + verify + "&auto=" + auto;
+        $url = '/admin/login/';
+        butSubmit($url, $data, 'POST');
+    }
+</script>

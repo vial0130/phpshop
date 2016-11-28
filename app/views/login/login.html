@@ -1,0 +1,87 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登陆</title>
+<link type="text/css" rel="stylesheet" href="/app/assign/style/reset.css">
+<link type="text/css" rel="stylesheet" href="/app/assign/style/main.css">
+<!--[if IE 6]>
+<script type="text/javascript" src="/app/assign/js/DD_belatedPNG_0.0.8a-min.js"></script>
+<script type="text/javascript" src="/app/assign/js/ie6Fixpng.js"></script>
+<![endif]-->
+</head>
+
+<body>
+<div class="headerBar">
+	<div class="logoBar login_logo">
+		<div class="comWidth">
+			<div class="logo fl">
+				<a href="#"><img src="/app/assign/images/logo.jpg" alt="慕课网"></a>
+			</div>
+			<h3 class="welcome_title">欢迎登陆</h3>
+		</div>
+	</div>
+</div>
+
+<div class="loginBox">
+	<div class="login_cont">
+        <form method='post' name='myForm'>
+            <ul class="login">
+                <li class="l_tit">邮箱/用户名</li>
+                <li class="mb_10"><input type="text" name="username" class="login_input user_icon"></li>
+                <li class="l_tit">密码</li>
+                <li class="mb_10"><input type="password" name="password" class="login_input user_icon"></li>
+                <li class="l_tit">验证码</li>
+                <li class="mb_10" style="position:relative"><input type="text" name="verify" class="login_input user_icon"><img style="position:absolute; top:1px; right:1px;" src="/app/code/index/h/32" onclick="this.src=this.src+'?'+Math.random()" /></li>
+                <li class="autoLogin"><input type="checkbox" name="auto" id="a1" class="checked"><label for="a1">自动登陆</label></li>
+                <li class="mb_10" style="color:red"><small id="remind"></small></li>
+                <li><input type="button" value="" class="login_btn" onclick="postSubmit()"></li>
+            </ul>
+        </form>
+		<div class="login_partners">
+			<h2 class="l_tit">使用合作方账号登陆网站</h2>
+			<ul class="login_list clearfix">
+				<li><a href="#">QQ</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">网易</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">新浪微博</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">腾讯微薄</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">新浪微博</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">腾讯微薄</a></li>
+			</ul>
+		</div>
+	</div>
+	<a class="reg_link" href="/app/login/register/"></a>
+</div>
+
+<div class="hr_25"></div>
+<div class="footer">
+	<p><a href="#">慕课简介</a><i>|</i><a href="#">慕课公告</a><i>|</i> <a href="#">招纳贤士</a><i>|</i><a href="#">联系我们</a><i>|</i>客服热线：400-675-1234</p>
+	<p>Copyright &copy; 2006 - 2014 慕课版权所有&nbsp;&nbsp;&nbsp;京ICP备09037834号&nbsp;&nbsp;&nbsp;京ICP证B1034-8373号&nbsp;&nbsp;&nbsp;某市公安局XX分局备案编号：123456789123</p>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/admin/assign/js/function.js"></script>
+<script>
+    function submitSuccess(data) {
+        window.location.href = '/';
+    }
+    function submitLoser(data) {
+        document.getElementById("remind").innerHTML = data;
+    }
+    function postSubmit() {
+        //获取值
+        var username = myForm.username.value;
+        var password = myForm.password.value;
+        var verify = myForm.verify.value;
+        var auto = myForm.auto.value;
+
+        $data = "username=" + username + "&password=" + password + "&verify=" + verify + "&auto=" + auto;
+        $url = '/login/login';
+        butSubmit($url, $data, 'POST');
+    }
+</script>

@@ -41,11 +41,10 @@ class albumCtrl extends commonCtrl
         $model = new albumModel;
         if($_POST && $_FILES){
             if($model->addWater()){
-                echo "<script>alert('添加成功');</script>"; 
+                echo "<script>alert('添加成功');window.location.href=\"/admin/pro/image/\"</script>";
             }else{
-                echo "<script>alert('添加失败');</script>";
+                echo "<script>alert('添加失败');window.location.href=\"/admin/pro/image/\"</script>";
             }
-            header('Location: /admin/pro/image/'); return;
         }else if($_GET){
             $sql = "SELECT a.id,a.name,b.path FROM shop_pro AS a INNER JOIN shop_album AS b ON a.id = b.pid WHERE a.id ={$_GET['id']}";
             $res = $model->select($sql);

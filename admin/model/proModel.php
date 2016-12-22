@@ -93,7 +93,7 @@ class proModel extends \phpcms\model
                     $this->insert($_POST);
                     $data['pid'] = $this->lastInsertId();
                     $album = new albumModel;
-                    $album->addAlbum($data);
+                    $album->insert($data);
                     $res = $this->commit();
                     if($res) return true;
                 }
@@ -118,6 +118,8 @@ class proModel extends \phpcms\model
      */
     public function editPro(){
         if($_FILES){
+            $album = new albumModel;
+            $resImg = $album->select("SELECT path FROM shop_album WHERE pid = {$_POST['id']}");
             $upload = new \phpcms\upload;
             $upload->set('filePath',conf::get('PICPATH','config'));
             $upload->set('maxSize',conf::get('PICSIZE','config'));
@@ -147,11 +149,17 @@ class proModel extends \phpcms\model
                     unset($_POST['id']);
                     try {
                         $this->beginTransaction();
-                        $album = new albumModel;
-                        $album->editAlbum($data,'pid = '.$where);
+                        $album->update($data,'pid = '.$where);
                         $this->update($_POST,'id = '.$where);
                         $res = $this->commit();
-                        if($res) return true;
+                        if($res){
+                            $Imgs = unserialize($resImg[0]['path']);
+                            foreach( $dataArr as $a=>$b){
+                                @unlink(ASSIGN.'thumbnail/'.$a.'_'.$b.'/'.$Imgs[0]);
+                            }
+                            @unlink(ASSIGN.'upload/picture/'.$Imgs[0]);
+                            return true;
+                        }
                     }
                     catch (\PDOException $e) {
                         $this->rollback();
@@ -199,10 +207,19 @@ class proModel extends \phpcms\model
         try {
             $this->beginTransaction();
             $album = new albumModel;
-            $album->deleteAlbum('pid = '.$where);
+            $dataArr = conf::get('PROSIZE','config'); // 加载图片尺寸数量
+            $resImg = $album->select("SELECT path FROM shop_album WHERE pid = {$_POST['id']}");
+            $album->delete('pid = '.$where);
             $this->delete('id = '.$where);
             $res = $this->commit();
-            if($res) return true;
+            if($res){
+                $Imgs = unserialize($resImg[0]['path']);
+                foreach( $dataArr as $a=>$b){
+                    @unlink(ASSIGN.'thumbnail/'.$a.'_'.$b.'/'.$Imgs[0]);
+                }
+                @unlink(ASSIGN.'upload/picture/'.$Imgs[0]);
+                return true;
+            }
         }
         catch (\PDOException $e) {
             $this->rollback();

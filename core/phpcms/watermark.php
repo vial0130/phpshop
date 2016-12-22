@@ -56,6 +56,12 @@ namespace phpcms;
          */
         public function waterMark()
         {
+            //取整
+            $this->waterW = ceil($this->waterW);
+            $this->waterH = ceil($this->waterH);
+            $this->positon = ceil($this->positon);
+            $this->alpha = ceil($this->alpha);
+
             $photoinfo = getimagesize($this->photo);
             if (!$photoinfo) {
                 return -1; //原文件不是可用图片类型

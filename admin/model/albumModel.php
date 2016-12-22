@@ -18,23 +18,6 @@ class albumModel extends \phpcms\model
     protected $table = 'album';
 
     /**
-     * pro模块调用方法
-     * @author vial
-     */
-    public function addAlbum($data)
-    {
-        return $this->insert($data);
-    }
-    public function editAlbum($data,$where)
-    {
-        return $this->update($data,$where);
-    }
-    public function deleteAlbum($data)
-    {
-        return $this->delete($data);
-    }
-
-    /**
      * 添加图片
      * @author vial
      */
@@ -132,9 +115,15 @@ class albumModel extends \phpcms\model
         if($res){
             $data['path'] = unserialize($res[0]['path']);
             $delete = intval($_GET['deletes'])-1;
+            $deleteImg = $data['path'][$delete];
             array_splice($data['path'],$delete,1);
             $data['path'] = serialize($data['path']);
+            $dataArr = conf::get('PROSIZE','config'); // 加载图片尺寸数量
             if($this->update($data,'pid='.$_GET['id'])){
+                foreach( $dataArr as $a=>$b){
+                    @unlink(ASSIGN.'thumbnail/'.$a.'_'.$b.'/'.$deleteImg);
+                }
+                @unlink(ASSIGN.'upload/picture/'.$deleteImg);
                 return true;
             }
         }

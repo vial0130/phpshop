@@ -70,7 +70,7 @@ namespace phpcms
 		private function createFont() {
 			for($i=0; $i<$this->number; $i++) {
 				$color= imagecolorallocate($this->imag, mt_rand(0,156), mt_rand(0,156), mt_rand(0,156));
-                imagettftext($this->imag,mt_rand(15,30),mt_rand(-30,30),mt_rand(1,5)+($this->width/$this->number)*$i,$this->height / 1.4,$color,'simhei.ttf',$this->code[$i]);//画出每个字符
+                imagettftext($this->imag,mt_rand(15,30),mt_rand(-30,30),mt_rand(1,5)+($this->width/$this->number)*$i,$this->height / 1.4,$color,'SimHei.ttf',$this->code[$i]);//画出每个字符
 			}
 		}
 

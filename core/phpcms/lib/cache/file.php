@@ -86,14 +86,16 @@ class file
      */
     public function clear()
     {
-        $dh=opendir($this->path);
-        while ($file=readdir($dh)) {
-            if($file!="." && $file!="..") {
-                $fullpath=$this->path."/".$file;
-                if(!is_dir($fullpath)) {
-                    unlink($fullpath);
-                } else {
-                    deldir($fullpath);
+        if( is_dir($this->path) ){
+            $dh=opendir($this->path);
+            while ($file=readdir($dh)) {
+                if($file!="." && $file!="..") {
+                    $fullpath=$this->path."/".$file;
+                    if(!is_dir($fullpath)) {
+                        unlink($fullpath);
+                    } else {
+                        deldir($fullpath);
+                    }
                 }
             }
         }

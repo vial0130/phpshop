@@ -4,12 +4,12 @@
  * ======================================================================== */
 return array
     (
-        'DNS'=>'mysql:host=qdm226570157.my3w.com;dbname=qdm226570157_db',
+        'DNS'=>'mysql:host=127.0.0.1;dbname=shopcms',
         'TYPE' => 'mysql',
-        'SERVER' => 'qdm226570157.my3w.com',
-	    'DATABASE' => 'qdm226570157_db',
-        'USERNAME'=>'qdm226570157',
-        'PASSWORD'=>'1234567895',
+        'SERVER' => '127.0.0.1',
+	    'DATABASE' => 'shopcms',
+        'USERNAME'=>'root',
+        'PASSWORD'=>'',
         'CHARSET' => 'utf8',
 	    'PREFIX' => 'shop_',
         //sqlite示例配置

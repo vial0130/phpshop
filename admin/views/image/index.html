@@ -61,7 +61,7 @@
                         <?php foreach($row['path'] as $v):  ?>
                         <img width="100" height="100" src="/admin/assign/thumbnail/220_220/<?php echo $v;?>" alt="" /> &nbsp;&nbsp;
                         <?php endforeach;?>
-                        <form class="pro_file" action="/admin/album/addImg/" method="post" enctype="multipart/form-data">
+                        <form class="pro_file" action="/admin/album/addImg/" method="post" name="pro_file_<?php echo $row['id'];?>" enctype="multipart/form-data">
                             <input id="pro_file" type="file" name="proimg" onchange="addImg('<?php echo $row['id'];?>')" />
                             <input type="hidden" name="id" value="<?php echo $row['id'];?>" />
                             <input id="submit_<?php echo $row['id'];?>" type="submit"/>

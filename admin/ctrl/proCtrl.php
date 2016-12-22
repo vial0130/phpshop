@@ -52,11 +52,11 @@ class proCtrl extends commonCtrl
             if($_POST){
                 if($model->editPro()){
                     echo "<script>alert('编辑成功');</script>";
-                    header("Location: /admin/pro/index/page/5/order/null/name/null/");
+                    header("Location: /admin/pro/index/page/5/");
                     return true;
                 }
                 echo "<script>alert('编辑失败');</script>";
-                header("Location: /admin/pro/index/page/5/order/null/name/null/");
+                header("Location: /admin/pro/index/page/5/");
                 return true;
             }
             $res = $model->onePro();

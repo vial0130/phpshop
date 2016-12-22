@@ -82,7 +82,6 @@ class upload
                         /* 上传文件  返回0为成功， 小于0都为错误 */
                         if($this->uploadFile()){
                             $fileNames[] = $this->newFileName;
-                            return true;
                         }
                     }
                 }

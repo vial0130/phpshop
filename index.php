@@ -1,24 +1,17 @@
 <?php
 /* ========================================================================
- * PHPCMS入口文件
+ * PHPCMS模块入口文件，用于定义常量
  * ======================================================================== */
-
-// 检测PHP环境
+ // 检测PHP环境
 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
     header("Content-type: text/html; charset=utf-8");
     die('配置环境太低，建议升级 PHP5.3.0 以上版本!');
 }
+// 根目录
+define('PHPCMS',$_SERVER['DOCUMENT_ROOT']);
 
-function module(){
-    if(isset($_SERVER['REQUEST_URI'])){
-        $pathstr = str_replace($_SERVER['SCRIPT_NAME'],'',$_SERVER['REQUEST_URI']);
-        $path = explode("/",trim($pathstr,"/"));
-        if( is_dir($_SERVER['DOCUMENT_ROOT'].'/'.$path[0]) ){
-            return $path[0];
-        }
-    }
-}
+// 默认项目目录
+define('INDEX','app');
 
-//引导页面
-$path = module() ? module() : 'app';
-include './'.$path.'/index.php';
+include PHPCMS.'/core/init.php';
+?>

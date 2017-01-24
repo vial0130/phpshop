@@ -1,6 +1,6 @@
 <?php
 /* ========================================================================
- * ppphp核心类
+ * phpcms核心类
  * 实现以下几个功能
  * 类自动加载
  * 启动框架
@@ -32,7 +32,6 @@ class phpcms
     {
         $route = new \phpcms\route();
         \phpcms\log::init();
-
         $action = $route->action;
         $ctrlFile = MODULE.'/ctrl/'.$route->ctrl.'Ctrl.php';
         $ctrlClass = MODULECTRL.$route->ctrl.'Ctrl';
@@ -56,17 +55,17 @@ class phpcms
      */
     public static function load($class)
     {
-        if(isset($classMap[$class])){
+        if(isset(self::$classMap[$class])){
             return true;
         }else{
             $class = str_replace('\\','/',trim($class,'\\'));
             if(is_file(CORE.$class.'.php')){
                 include_once CORE.$class.'.php';
-                self::$classMap[] = $class;
+                self::$classMap[$class] = $class;
             }else{
                 if(is_file(PHPCMS.'/'.$class.'.php')) {
                     include_once PHPCMS.'/'.$class.'.php';
-                    self::$classMap[] = $class;
+                    self::$classMap[$class] = $class;
                 }
             }
         }

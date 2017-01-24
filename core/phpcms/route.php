@@ -22,9 +22,17 @@ class route
             $path = explode('/',trim($path[0],'/'));
             //去除模块名
             if( is_dir(PHPCMS.'/'.$path[0]) ){
+            	// 模块路径
+            	$path[0] = empty($path[0])? INDEX : $path[0];
+				define('MODULE',PHPCMS.'/'.$path[0].'/');
+				define('MODULECTRL','\\'.$path[0].'\\ctrl\\');
                 unset($path[0]);
                 $path=array_values($path);
+            }else{
+            	define('MODULE',PHPCMS.'/'.INDEX.'/');
+				define('MODULECTRL','\\'.INDEX.'\\ctrl\\');
             }
+			define('ASSIGN',MODULE.'assign/');#资源库
             if(isset($path[0]) && $path[0]) {
                 $this->ctrl = $path[0];
                 unset($path[0]);

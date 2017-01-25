@@ -8,7 +8,7 @@ return array(
      */
     'CACHE_TYPE'=>'file',#缓存驱动
     'OPTION'=> [
-        'path'=>PHPCMS.'/#run/cache',#储存位置
+        'path'=>PHPCMS.'/rundata/cache',#储存位置
         'time'=>3600,#超时时间
     ]
 );

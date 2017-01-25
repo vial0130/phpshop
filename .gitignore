@@ -3,5 +3,11 @@
 *.iml
 out
 gen
-/#run/
+/rundata/
 /.project
+/logo.psd
+/database
+/admin/assign/thumbnail/
+/admin/assign/upload/
+/app/assign/thumbnail/
+/app/assign/upload/

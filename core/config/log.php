@@ -4,6 +4,6 @@
  * ======================================================================== */
 return array(
     'LOG_TYPE'=>'file',#日志驱动
-    'LOG_PATH'=>PHPCMS.'/#run/log/'#存储位置
+    'LOG_PATH'=>PHPCMS.'/rundata/log/'#存储位置
 );
 ?>

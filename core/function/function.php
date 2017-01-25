@@ -33,5 +33,6 @@ function md5Uniqid(){
  * @return string
  */
 function extName($type,$name){
-	return strtolower(end(explode($type,$name)));//打散字符串得到最后一个默认小写
+	$array = explode($type,$name);
+	return strtolower(end($array));//打散字符串得到最后一个默认小写
 }
